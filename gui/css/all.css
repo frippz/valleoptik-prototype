@@ -1,0 +1,8 @@
+/**
+ * all.css
+ *
+ * Import ALL the stylesheets!
+ */
+
+@import url('basic.css');
+@import url('main.css');
