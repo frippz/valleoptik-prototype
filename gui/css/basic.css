@@ -109,8 +109,8 @@
     font: 100%/1.5 Helvetica, Arial, sans-serif;
     font-weight: 300;
 
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+    /* -ms-text-size-adjust: 100%; */
+    /* -webkit-text-size-adjust: 100%; */
   }
 
   code,
