@@ -11,4 +11,3 @@ if('querySelector' in document && 'classList' in document.createElement('a') && 
   document.querySelector('html').classList.add('js');
 
 }
-
