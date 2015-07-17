@@ -19,6 +19,20 @@
 
 
   /**
+   * Main navigation
+   */
+  #main-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #main-nav li + li {
+    margin-top: .75em;
+  }
+
+
+  /**
    * Skip links
    */
   #skip {
