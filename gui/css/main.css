@@ -26,6 +26,12 @@
     color: #fff;
   }
 
+  /**
+   * Logo
+   */
+  .logo {
+    margin-top: 0;
+  }
 
   /**
    * Main navigation
@@ -39,7 +45,6 @@
   #main-nav li + li {
     margin-top: .75em;
   }
-
 
   /**
    * Skip links
@@ -66,6 +71,5 @@
     top: 0;
     width: 100%;
   }
-
 
 }/* END @media screen */
