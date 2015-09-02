@@ -17,6 +17,15 @@
     padding-right: 1em;
   }
 
+  /**
+   * Banner
+   */
+  [role="banner"] {
+    background: #494949;
+    background: rgba(73, 73, 73, .9);
+    color: #fff;
+  }
+
 
   /**
    * Main navigation
