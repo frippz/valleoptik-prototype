@@ -18,32 +18,69 @@
   }
 
   /**
-   * Banner
+   * Banner layout
    */
   [role="banner"] {
     background: #494949;
-    background: rgba(73, 73, 73, .9);
     color: #fff;
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+
+  .logo,
+  [role="navigation"] {
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
+  [role="navigation"] {
+    flex: 1 0 auto;
+    margin-top: .45em;
   }
 
   /**
    * Logo
    */
   .logo {
+    flex: 0 0 12em;
     margin-top: 0;
+  }
+
+  .logo a {
+    background: url('/gui/i/logo.svg') no-repeat 0 0;
+    background-size: contain;
+    display: block;
+    height: 1em;
+    width: 5em;
   }
 
   /**
    * Main navigation
    */
   #main-nav {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: flex-end;
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
+  #main-nav li {
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
   #main-nav li + li {
-    margin-top: .75em;
+    margin-top: 0;
+  }
+
+  #main-nav li a {
+    display: block;
+    padding: .25em 0em .25em 1em;
+    text-decoration: none;
   }
 
   /**
