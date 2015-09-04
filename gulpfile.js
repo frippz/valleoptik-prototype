@@ -2,10 +2,11 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
     minifyCss = require('gulp-minify-css'),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify');
 
 var paths = {
-  scripts: ['./gui/js/**/*.js'],
+  js: ['./gui/js/**/*.js'],
   css: ['./gui/css/**/*.css'],
   images: ['./gui/i/**/*.*']
 };
@@ -21,11 +22,17 @@ gulp.task('css', function () {
 });
 
 gulp.task('js', function () {
-
+  return gulp.src(paths.js)
+    .pipe(sourcemaps.init())
+    .pipe(concat('all.js'))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./dist/js/'))
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.css, ['default']);
+  gulp.watch(paths.css, ['css']);
+  gulp.watch(paths.js, ['js']);
 });
 
 gulp.task('copy', function(){
@@ -33,4 +40,4 @@ gulp.task('copy', function(){
     .pipe(gulp.dest('dist/i/'));
 });
 
-gulp.task('default', ['watch', 'css', 'copy']);
+gulp.task('default', ['watch', 'css', 'js', 'copy']);
