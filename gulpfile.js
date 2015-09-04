@@ -3,7 +3,9 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     minifyCss = require('gulp-minify-css'),
     concat = require('gulp-concat'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    postcss = require('gulp-postcss'),
+    customProperties = require("postcss-custom-properties");
 
 // Configure paths
 var paths = {
@@ -17,6 +19,7 @@ gulp.task('css', function () {
   return gulp.src(paths.css)
     .pipe(sourcemaps.init())
     .pipe(autoprefixer({browsers: ['last 2 versions']}))
+    .pipe(postcss([customProperties()]))
     .pipe(concat('all.css'))
     .pipe(minifyCss({compatibility: 'ie8'}))
     .pipe(sourcemaps.write('.'))
