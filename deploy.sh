@@ -96,7 +96,7 @@ if [[ -z `ls -A "$deploy_directory" 2> /dev/null` && -z $allow_empty ]]; then
 fi
 
 disable_expanded_output
-git fetch --force $repo $deploy_branch:$deploy_branch
+git fetch --force --update-head-ok $repo $deploy_branch:$deploy_branch
 enable_expanded_output
 
 #make deploy_branch the current branch
