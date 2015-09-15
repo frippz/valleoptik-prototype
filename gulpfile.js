@@ -53,7 +53,7 @@ gulp.task('js', function () {
     .pipe(gulp.dest(paths.jsDest))
 });
 
-// Watch for changes in JS and CSS
+// Watch for changes
 gulp.task('watch', function() {
   watch(paths.css, function() {
     gulp.start(['css']);
