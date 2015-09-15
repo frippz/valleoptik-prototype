@@ -8,6 +8,8 @@ var gulp = require('gulp'),
     watch = require('gulp-watch'),
     customProperties = require("postcss-custom-properties");
 
+var ghPages = require('gulp-gh-pages');
+
 // Configure paths
 var paths = {
 
@@ -79,6 +81,12 @@ gulp.task('images', function(){
 gulp.task('templates', function () {
   gulp.src(paths.templates)
     .pipe(gulp.dest(paths.tplDest));
+});
+
+// Deploy to gh-pages
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
 });
 
 gulp.task('default', ['watch', 'css', 'js', 'images', 'templates']);
