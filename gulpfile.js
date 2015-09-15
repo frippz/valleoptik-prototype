@@ -5,24 +5,29 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     postcss = require('gulp-postcss'),
+    watch = require('gulp-watch'),
     customProperties = require("postcss-custom-properties");
 
 // Configure paths
 var paths = {
 
   // Inputs
-  js: ['./gui/js/**/*.js'],
-  css: ['./gui/css/**/*.css'],
-  images: ['./gui/i/**/*.*'],
+  js: ['./src/gui/js/**/*.js'],
+  css: ['./src/gui/css/**/*.css'],
+
+  // Static assets
+  images: ['./src/gui/i/**/*.*'],
+  templates: ['./src/**/*.html'],
 
   // Outputs
   jsOutput: 'all.js',
   cssOutput: 'all.css',
 
   // Destinations
-  jsDest: './dist/js/',
-  cssDest: './dist/css/',
-  imgDest: './dist/i/'
+  jsDest: './dist/gui/js/',
+  cssDest: './dist/gui/css/',
+  imgDest: './dist/gui/i/',
+  tplDest: './dist/'
 
 };
 
@@ -50,14 +55,30 @@ gulp.task('js', function () {
 
 // Watch for changes in JS and CSS
 gulp.task('watch', function() {
-  gulp.watch(paths.css, ['css']);
-  gulp.watch(paths.js, ['js']);
+  watch(paths.css, function() {
+    gulp.start(['css']);
+  });
+  watch(paths.js, function() {
+    gulp.start(['js']);
+  });
+  watch(paths.images, function() {
+    gulp.start(['images']);
+  });
+  watch(paths.templates, function() {
+    gulp.start(['templates']);
+  });
 });
 
 // Copy image assets into /dist
-gulp.task('copy', function(){
+gulp.task('images', function(){
   gulp.src(paths.images)
     .pipe(gulp.dest(paths.imgDest));
 });
 
-gulp.task('default', ['watch', 'css', 'js', 'copy']);
+// Copy template assets into /dist
+gulp.task('templates', function () {
+  gulp.src(paths.templates)
+    .pipe(gulp.dest(paths.tplDest));
+});
+
+gulp.task('default', ['watch', 'css', 'js', 'images', 'templates']);
