@@ -20,8 +20,8 @@ var paths = {
   templates: ['./src/**/*.html'],
 
   // Outputs
-  jsOutput: 'all.js',
-  cssOutput: 'all.css',
+  jsOutput: 'main.js',
+  cssOutput: 'styles.css',
 
   // Destinations
   jsDest: './dist/gui/js/',
