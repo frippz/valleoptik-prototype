@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     customProperties = require('postcss-custom-properties'),
     ghPages = require('gh-pages'),
     path = require('path'),
+    eslint = require('gulp-eslint'),
     htmlhint = require('gulp-htmlhint'),
     csslint = require('gulp-csslint');
 
@@ -54,7 +55,7 @@ gulp.task('js', function () {
     .pipe(concat(paths.jsOutput))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.jsDest))
+    .pipe(gulp.dest(paths.jsDest));
 });
 
 // HTMLhint
@@ -62,7 +63,7 @@ gulp.task('htmlhint', function () {
  return gulp.src(paths.templates)
     .pipe(htmlhint('.htmlhintrc'))
     .pipe(htmlhint.reporter('htmlhint-stylish'))
-    .pipe(htmlhint.failReporter({ suppress: true }))
+    .pipe(htmlhint.failReporter({ suppress: true }));
 });
 
 // CSS linting
@@ -72,13 +73,23 @@ gulp.task('csslint', function () {
     .pipe(csslint.reporter('compact'));
 });
 
+// eslint
+gulp.task('eslint', function () {
+  return gulp.src(paths.js)
+    .pipe(eslint())
+    .pipe(eslint.format());
+});
+
+// Linting task
+gulp.task('lint', ['htmlhint', 'csslint', 'eslint']);
+
 // Watch for changes
 gulp.task('watch', function() {
   watch(paths.css, function() {
     gulp.start(['css', 'csslint']);
   });
   watch(paths.js, function() {
-    gulp.start(['js']);
+    gulp.start(['js', 'eslint']);
   });
   watch(paths.images, function() {
     gulp.start(['images']);
@@ -105,4 +116,4 @@ gulp.task('deploy', function (cb) {
   ghPages.publish(path.join(process.cwd(), paths.tplDest), cb);
 });
 
-gulp.task('default', ['watch', 'css', 'js', 'images', 'templates', 'htmlhint', 'csslint']);
+gulp.task('default', ['watch', 'css', 'js', 'images', 'templates', 'lint']);
