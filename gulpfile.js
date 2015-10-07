@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     path = require('path'),
     eslint = require('gulp-eslint'),
     htmlhint = require('gulp-htmlhint'),
-    csslint = require('gulp-csslint');
+    csslint = require('gulp-csslint'),
+    w3cjs = require('gulp-w3cjs');
 
 // Configure paths
 var paths = {
@@ -80,8 +81,14 @@ gulp.task('eslint', function () {
     .pipe(eslint.format());
 });
 
+// Validation
+gulp.task('validate', function () {
+  return gulp.src(paths.templates)
+    .pipe(w3cjs());
+});
+
 // Linting task
-gulp.task('lint', ['htmlhint', 'csslint', 'eslint']);
+gulp.task('lint', ['htmlhint', 'csslint', 'eslint', 'validate']);
 
 // Watch for changes
 gulp.task('watch', function() {
@@ -95,7 +102,7 @@ gulp.task('watch', function() {
     gulp.start(['images']);
   });
   watch(paths.templates, function() {
-    gulp.start(['templates', 'htmlhint']);
+    gulp.start(['templates', 'htmlhint', 'validate']);
   });
 });
 
