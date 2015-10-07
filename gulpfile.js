@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     watch = require('gulp-watch'),
     customProperties = require('postcss-custom-properties'),
     ghPages = require('gh-pages'),
-    path = require('path');
+    path = require('path'),
+    htmlhint = require('gulp-htmlhint'),
+    csslint = require('gulp-csslint');
 
 // Configure paths
 var paths = {
@@ -55,10 +57,25 @@ gulp.task('js', function () {
     .pipe(gulp.dest(paths.jsDest))
 });
 
+// HTMLhint
+gulp.task('htmlhint', function () {
+ return gulp.src(paths.templates)
+    .pipe(htmlhint('.htmlhintrc'))
+    .pipe(htmlhint.reporter('htmlhint-stylish'))
+    .pipe(htmlhint.failReporter({ suppress: true }))
+});
+
+// CSS linting
+gulp.task('csslint', function () {
+  return gulp.src(paths.css)
+    .pipe(csslint('.csslintrc'))
+    .pipe(csslint.reporter('compact'));
+});
+
 // Watch for changes
 gulp.task('watch', function() {
   watch(paths.css, function() {
-    gulp.start(['css']);
+    gulp.start(['css', 'csslint']);
   });
   watch(paths.js, function() {
     gulp.start(['js']);
@@ -67,7 +84,7 @@ gulp.task('watch', function() {
     gulp.start(['images']);
   });
   watch(paths.templates, function() {
-    gulp.start(['templates']);
+    gulp.start(['templates', 'htmlhint']);
   });
 });
 
@@ -88,4 +105,4 @@ gulp.task('deploy', function (cb) {
   ghPages.publish(path.join(process.cwd(), paths.tplDest), cb);
 });
 
-gulp.task('default', ['watch', 'css', 'js', 'images', 'templates']);
+gulp.task('default', ['watch', 'css', 'js', 'images', 'templates', 'htmlhint', 'csslint']);
