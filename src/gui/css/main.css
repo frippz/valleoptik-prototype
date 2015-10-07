@@ -80,7 +80,7 @@
 
   #main-nav li a {
     display: block;
-    padding: .25em 0em .25em 1em;
+    padding: .25em 0 .25em 1em;
     text-decoration: none;
   }
 
