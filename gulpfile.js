@@ -1,18 +1,18 @@
-var gulp = require('gulp'),
-    sourcemaps = require('gulp-sourcemaps'),
-    autoprefixer = require('gulp-autoprefixer'),
-    minifyCss = require('gulp-minify-css'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    postcss = require('gulp-postcss'),
-    watch = require('gulp-watch'),
+var gulp             = require('gulp'),
+    sourcemaps       = require('gulp-sourcemaps'),
+    autoprefixer     = require('gulp-autoprefixer'),
+    minifyCss        = require('gulp-minify-css'),
+    concat           = require('gulp-concat'),
+    uglify           = require('gulp-uglify'),
+    postcss          = require('gulp-postcss'),
+    watch            = require('gulp-watch'),
     customProperties = require('postcss-custom-properties'),
-    ghPages = require('gh-pages'),
-    path = require('path'),
-    eslint = require('gulp-eslint'),
-    htmlhint = require('gulp-htmlhint'),
-    csslint = require('gulp-csslint'),
-    w3cjs = require('gulp-w3cjs');
+    ghPages          = require('gh-pages'),
+    path             = require('path'),
+    eslint           = require('gulp-eslint'),
+    htmlhint         = require('gulp-htmlhint'),
+    csslint          = require('gulp-csslint'),
+    w3cjs            = require('gulp-w3cjs');
 
 // Configure paths
 var paths = {
